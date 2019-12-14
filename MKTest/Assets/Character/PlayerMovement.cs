@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // Calculate the speed of the player movement
-        moveX = Input.GetAxisRaw("Horizontal") * moveSpeed;
+        moveX = moveSpeed;
 
         // Set the animator to play the right animation
         animator.SetFloat("speed", Mathf.Abs(moveX));
@@ -39,6 +39,17 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    
+    // Collision event with coin
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
+    
+
     public void OnLanding()
     {
         animator.SetBool("isJumping", false);
@@ -48,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // Moving the character
-        controller.Move(moveX * Time.fixedDeltaTime, false, jump);
+        controller.Move(moveX * Time.fixedDeltaTime, jump);
         jump = false;
 
     }
