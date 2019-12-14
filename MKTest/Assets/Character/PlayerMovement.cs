@@ -6,12 +6,13 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public CharacterController2D controller;
+    public Animator animator;
 
     public float moveSpeed = 40f;
 
     float moveX = 0f;
 
-    bool jumping = false;
+    bool jump = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,19 +27,29 @@ public class PlayerMovement : MonoBehaviour
         // Calculate the speed of the player movement
         moveX = Input.GetAxisRaw("Horizontal") * moveSpeed;
 
+        // Set the animator to play the right animation
+        animator.SetFloat("speed", Mathf.Abs(moveX));
+
         // Check if the player is trying to jump
         if (Input.GetButtonDown("Jump"))
         {
-            jumping = true;
+            jump = true;
+            animator.SetBool("isJumping", true);
         }
 
+    }
+
+    public void OnLanding()
+    {
+        animator.SetBool("isJumping", false);
     }
 
     private void FixedUpdate()
     {
 
         // Moving the character
-        controller.Move(moveX * Time.fixedDeltaTime, false, jumping);
-        jumping = false;
+        controller.Move(moveX * Time.fixedDeltaTime, false, jump);
+        jump = false;
+
     }
 }
