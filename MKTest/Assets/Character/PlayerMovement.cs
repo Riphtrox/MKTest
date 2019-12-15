@@ -82,6 +82,11 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
             coinSound.Play();
         }
+        else if (other.gameObject.CompareTag("Spike"))
+        {
+            //Open the game over menu
+            FindObjectOfType<GameManager>().GameOver();
+        }
         
     }
     
