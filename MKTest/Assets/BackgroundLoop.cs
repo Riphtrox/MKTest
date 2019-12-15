@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BackgroundLoop : MonoBehaviour
 {
-    public GameObject[] layers;
-    private Camera mainCamera;
-    private Vector2 cameraBoundary;
-    public float choke;
+    public GameObject[] layers;             //Layers in the background
+    private Camera mainCamera;              //The main camera
+    private Vector2 cameraBoundary;         //The edges of the camera
+    public float choke;                     //This can be used to smooth transitions between background clones
 
     private void Start()
     {

@@ -7,6 +7,7 @@ public class StartGame : MonoBehaviour
 {
     public void StartRun()
     {
+        //Swaps to the gameplay scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
