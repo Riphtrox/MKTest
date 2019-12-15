@@ -8,6 +8,7 @@ public class RestartGame : MonoBehaviour
     public void RestartRun()
     {
         //Restarts the scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;    //The character controller
     public Animator animator;                   //The animator in charge of player animations
     public AudioSource coinSound;               //Audio that plays when collecting coins
-    public AudioSource deathSound;              //Audio that plays when the player dies
+
 
     public float moveSpeed = 40f;               //The speed at which the player runs
 
@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (this.GetComponent<Transform>().position.y <= DEATH_ZONE_Y)
         {
-            deathSound.Play();
 
             //Open the game over menu
             FindObjectOfType<GameManager>().GameOver();

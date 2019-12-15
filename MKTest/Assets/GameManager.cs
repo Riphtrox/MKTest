@@ -6,8 +6,10 @@ public class GameManager : MonoBehaviour
     public GameObject scoreOverlay; //The overlay showing the score during gameplay
     public GameObject gameOverMenu; //The menu at game over
     public TextMeshProUGUI text;    //The text to display score
+    public AudioSource deathSound;  //Audio that plays when the player dies
     bool gameIsOver = false;        //Check if GameOver has already been called
     int score;                      //Saving the score
+
 
     private void Awake()
     {
@@ -21,6 +23,9 @@ public class GameManager : MonoBehaviour
         if (!gameIsOver)
         {
             gameIsOver = true;
+
+            deathSound.Play();
+
             //Pause the game
             Time.timeScale = 0;
 

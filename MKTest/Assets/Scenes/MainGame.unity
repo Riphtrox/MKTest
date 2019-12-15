@@ -733,7 +733,6 @@ MonoBehaviour:
   controller: {fileID: 240203625}
   animator: {fileID: 240203622}
   coinSound: {fileID: 1064306916}
-  deathSound: {fileID: 1399631860}
   moveSpeed: 40
 --- !u!1 &519420028
 GameObject:
@@ -970,6 +969,7 @@ MonoBehaviour:
   scoreOverlay: {fileID: 998015461}
   gameOverMenu: {fileID: 884334124}
   text: {fileID: 65452455}
+  deathSound: {fileID: 1399631860}
 --- !u!4 &715778668
 Transform:
   m_ObjectHideFlags: 0
