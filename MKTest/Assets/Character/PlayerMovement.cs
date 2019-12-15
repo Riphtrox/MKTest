@@ -30,8 +30,17 @@ public class PlayerMovement : MonoBehaviour
         // Set the animator to play the right animation
         animator.SetFloat("speed", Mathf.Abs(moveX));
 
+        // Check for touches on mobile device
+        int fingerCount = 0;
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
+                fingerCount++;
+
+        }
+
         // Check if the player is trying to jump
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") || fingerCount > 0)
         {
             jump = true;
             animator.SetBool("isJumping", true);

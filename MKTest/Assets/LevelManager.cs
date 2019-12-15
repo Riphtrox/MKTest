@@ -32,6 +32,13 @@ public class LevelManager : MonoBehaviour
             //Spawn another level part
             SpawnLevelPart();
         }
+
+        //Check player distance
+        if (Vector3.Distance(player.GetComponent<Transform>().position, prevPartPos) > -PLAYER_DISTANCE_SPAWN_LEVEL_PART)
+        {
+            //Spawn another level part
+            
+        }
     }
 
     private void SpawnLevelPart()
