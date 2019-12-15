@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     private const float DEATH_ZONE_Y = 0f;
     public CharacterController2D controller;
     public Animator animator;
+    public AudioSource coinSound;
+    public AudioSource jumpSound;
+    public AudioSource deathSound;
 
     public float moveSpeed = 40f;
 
@@ -27,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (this.GetComponent<Transform>().position.y <= DEATH_ZONE_Y)
         {
+            deathSound.Play();
             SceneManager.LoadScene(0);
         }
 
@@ -50,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jump = true;
             animator.SetBool("isJumping", true);
+            jumpSound.Play();
         }
 
     }
@@ -61,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Coin"))
         {
             Destroy(other.gameObject);
+            coinSound.Play();
         }
         
     }
