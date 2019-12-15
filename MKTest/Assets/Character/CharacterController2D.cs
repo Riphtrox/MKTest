@@ -85,4 +85,18 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
+    public void UnStuck()
+    {
+        rigidBody.AddForce(new Vector2(0f, 5f));
+    }
+
+    public bool MovementCheck()
+    {
+        float speed = rigidBody.velocity.magnitude;
+        if(speed < 0.5)
+        {
+            return true;
+        }
+        return false;
+    }
 }

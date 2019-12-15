@@ -9,27 +9,39 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;    //The character controller
     public Animator animator;                   //The animator in charge of player animations
     public AudioSource coinSound;               //Audio that plays when collecting coins
-
-
     public float moveSpeed = 40f;               //The speed at which the player runs
 
+    Transform prevPos;                          //The player's previous position
     float moveX = 0f;                           //The horizontal movement value
-
+    bool hasPrevPos = false;                    //A test for if the players previous position has been stored
     bool jump = false;                          //A test for the player trying to jump
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (this.GetComponent<Transform>().position.y <= DEATH_ZONE_Y)
-        {
 
+        //Check if the player is stuck (can't move horizontally)
+        bool isStuck = false;
+        if(hasPrevPos)
+        {
+            isStuck = controller.MovementCheck();
+        }
+
+        if (isStuck)
+        {
+            controller.UnStuck();
+        }
+
+        //Check if the player is in a death situation
+        if(this.GetComponent<Transform>().position.y <= DEATH_ZONE_Y)
+        {
             //Open the game over menu
             FindObjectOfType<GameManager>().GameOver();
         }
@@ -56,6 +68,9 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isJumping", true);
         }
 
+
+        prevPos = this.GetComponent<Transform>();
+        hasPrevPos = true;
     }
 
     
