@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         if (this.GetComponent<Transform>().position.y <= DEATH_ZONE_Y)
         {
             deathSound.Play();
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         // Calculate the speed of the player movement
