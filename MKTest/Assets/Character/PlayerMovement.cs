@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    private const float DEATH_ZONE_Y = 0f;
     public CharacterController2D controller;
     public Animator animator;
 
@@ -24,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
+        if (this.GetComponent<Transform>().position.y <= DEATH_ZONE_Y)
+        {
+            SceneManager.LoadScene(0);
+        }
+
         // Calculate the speed of the player movement
         moveX = moveSpeed;
 
@@ -32,15 +38,15 @@ public class PlayerMovement : MonoBehaviour
 
         // Check for touches on mobile device
         int fingerCount = 0;
-        foreach (Touch touch in Input.touches)
+        foreach(Touch touch in Input.touches)
         {
-            if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
+            if(touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
                 fingerCount++;
 
         }
 
         // Check if the player is trying to jump
-        if (Input.GetButtonDown("Jump") || fingerCount > 0)
+        if(Input.GetButtonDown("Jump") || fingerCount > 0)
         {
             jump = true;
             animator.SetBool("isJumping", true);
@@ -56,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
+        
     }
     
 
