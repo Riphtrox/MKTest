@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     float moveX = 0f;                           //The horizontal movement value
     bool hasPrevPos = false;                    //A test for if the players previous position has been stored
     bool jump = false;                          //A test for the player trying to jump
+    bool jumpBoost = false;                     //Is the player holding the button
+    bool usingFingers = false;                  //As soon as a finger is detected, conclude that touch controls are used
+    bool jumpFinished = false;                  //Has the player finished their jump
 
     // Start is called before the first frame update
     void Start()
@@ -60,13 +63,23 @@ public class PlayerMovement : MonoBehaviour
                 fingerCount++;
 
         }
-
+        if(fingerCount > 0)
+        {
+            usingFingers = true;
+        }
         //Check if the player is trying to jump
-        if(Input.GetButtonDown("Jump") || fingerCount > 0)
+        if(Input.GetButtonDown("Jump") || (usingFingers && fingerCount > 0))
         {
             jump = true;
             animator.SetBool("isJumping", true);
         }
+        else if (Input.GetButtonUp("Jump") || (usingFingers && fingerCount == 0))
+        {
+            jump = false;                                       //Should be false but just to be sure
+            jumpBoost = false;
+            jumpFinished = true;
+        }
+
 
 
         prevPos = this.GetComponent<Transform>();
@@ -95,13 +108,18 @@ public class PlayerMovement : MonoBehaviour
     {
         //Change to the required animation
         animator.SetBool("isJumping", false);
+        jumpFinished = false;
     }
 
     private void FixedUpdate()
     {
 
         //Moving the character
-        controller.Move(moveX * Time.fixedDeltaTime, jump);
+        controller.Move(moveX * Time.fixedDeltaTime, jump, jumpBoost, jumpFinished);
+        if (jump && !jumpFinished)
+        {
+            jumpBoost = true;
+        }
         jump = false;
 
     }
