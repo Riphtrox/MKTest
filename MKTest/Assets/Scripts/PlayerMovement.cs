@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     bool jumpBoost = false;                     //Is the player holding the button
     bool usingFingers = false;                  //As soon as a finger is detected, conclude that touch controls are used
     bool jumpFinished = false;                  //Has the player finished their jump
+    bool canJump = true;
 
     // Start is called before the first frame update
     void Start()
@@ -70,16 +71,22 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Check if the player is trying to jump
-        if(Input.GetButtonDown("Jump") || (usingFingers && fingerCount > 0))
+        if(Input.GetButtonDown("Jump") || (usingFingers && fingerCount > 0 && canJump))
         {
             jump = true;
             animator.SetBool("isJumping", true);
+
+            //Don't allow another jump input until button is released
+            canJump = false;
         }
         else if (Input.GetButtonUp("Jump") || (usingFingers && fingerCount == 0))
         {
             jump = false;                                       //Should be false but just to be sure
             jumpBoost = false;
             jumpFinished = true;
+
+            //Fingers released, can now jump again
+            canJump = true;
         }
 
         prevPos = this.GetComponent<Transform>();
