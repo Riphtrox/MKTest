@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 400
-  jumpTime: 0.05
+  jumpTime: 0.1
   movementSmoothing: 0.05
   whatIsGround:
     serializedVersion: 2
@@ -1235,6 +1235,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723638852}
   m_CullTransparentMesh: 0
+--- !u!1 &754112609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 754112611}
+  - component: {fileID: 754112610}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &754112610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754112609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b71d0f7be826de43a5af7f92f84ccd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: area1
+    prefab: {fileID: 2471304170521129742, guid: 9ce680deffbf968499166c1f7895a26d,
+      type: 3}
+    size: 6
+  - tag: area2
+    prefab: {fileID: 9153621756601202010, guid: d9975e8aa4e659e4084a93db639b4022,
+      type: 3}
+    size: 6
+  - tag: area3
+    prefab: {fileID: 2388811246196509119, guid: 63902748d380ecf45831d0131f02c310,
+      type: 3}
+    size: 6
+  - tag: area4
+    prefab: {fileID: 8591620967854551655, guid: 0f0f131301af8b64b831dc689350a22d,
+      type: 3}
+    size: 6
+  pooledObject: {fileID: 2471304170521129742, guid: 9ce680deffbf968499166c1f7895a26d,
+    type: 3}
+  amountPooled: 6
+--- !u!4 &754112611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754112609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.3936744, y: 3.9889667, z: -383.7265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &884334124
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,6 +2368,7 @@ MonoBehaviour:
   - {fileID: 2388811246196509119, guid: 63902748d380ecf45831d0131f02c310, type: 3}
   - {fileID: 8591620967854551655, guid: 0f0f131301af8b64b831dc689350a22d, type: 3}
   player: {fileID: 240203621}
+  objectPool: {fileID: 754112610}
 --- !u!4 &1487860653
 Transform:
   m_ObjectHideFlags: 0

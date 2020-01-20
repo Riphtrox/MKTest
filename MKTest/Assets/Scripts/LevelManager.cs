@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Transform[] levelPartList;             //The list of level parts
     [SerializeField] private GameObject player;                     //The player
 
+    public ObjectPooler objectPool;                                 //The object pooler
+
     private List<GameObject> spawnedParts;                          //Preparing to save spawned parts
     private Vector3 prevPartPos;                                    //The position of the previous level part
 
@@ -20,13 +22,7 @@ public class LevelManager : MonoBehaviour
         //Initialize variables
         spawnedParts = new List<GameObject>();
         prevPartPos = new Vector3 (levelStart.position.x + 20, levelStart.position.y, levelStart.position.z);
-
-        //Spawn the initial level parts
-        int startingSpawnLevelParts = 5;
-        for (int i = 0; i < startingSpawnLevelParts; i++)
-        {
-            SpawnLevelPart();
-        }
+        objectPool = ObjectPooler.instance;        
     }
 
     private void Update()
@@ -46,41 +42,47 @@ public class LevelManager : MonoBehaviour
         //Check if spawning the first part - this will always be the starting platform
         if (spawnedParts.Count <= 0)
         {
-            Transform prevPartLoc = SpawnLevelPart(levelStart, levelStart.position);
+            Transform prevPartLoc = Instantiate(levelStart, levelStart.position, Quaternion.identity);
             spawnedParts.Add(prevPartLoc.gameObject);
         }
         else
         {
+            //Getting the random number to select the level part to spawn
+            int partIndex = Random.Range(0, levelPartList.Length);
 
-            //Select a random level part to spawn next
-            Transform randomPart = levelPartList[Random.Range(0, levelPartList.Length)];
-            Transform prevPartLoc = SpawnLevelPart(randomPart, prevPartPos);
+            //Using the index to set up the tag for the pool dictionary
+            string tag = "area" + (partIndex + 1);
+
+            //Saving the transform of the new part
+            Transform randomPart = levelPartList[partIndex];
+
+            //Spawn the new part
+            Transform prevPartLoc = SpawnLevelPart(tag, randomPart, prevPartPos);
             spawnedParts.Add(prevPartLoc.gameObject);
-
+            
             //Check if the initial level parts have finished spawning
             if (spawnedParts.Count >= 6)
             {
                 DestroyPart();
             }
-
+            
             //Set the position to the latest spawn
             prevPartPos = new Vector3(prevPartLoc.position.x + 20, prevPartLoc.position.y, prevPartLoc.position.z);
         }
     }
 
-    private Transform SpawnLevelPart(Transform levelPart, Vector3 spawnPosition)
+    private Transform SpawnLevelPart(string tag, Transform levelPart, Vector3 spawnPosition)
     {
-
-        //Instantiate a clone of the level part
-        Transform levelPartTrans = Instantiate(levelPart, spawnPosition, Quaternion.identity);
-        return levelPartTrans;
+        //Get the part from the pool
+        Transform newPart = objectPool.SpawnPooledObject(tag, spawnPosition, Quaternion.identity);
+        return newPart;
     }
 
     private void DestroyPart()
     {
 
-        //Destroy a level part that is no longer used
-        Destroy(spawnedParts[0]);
+        //Disable a level part that is no longer used
+        spawnedParts[0].SetActive(false);
         spawnedParts.RemoveAt(0);
     }
 }

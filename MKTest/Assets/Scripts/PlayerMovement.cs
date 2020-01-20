@@ -61,12 +61,14 @@ public class PlayerMovement : MonoBehaviour
         {
             if(touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
                 fingerCount++;
-
         }
+
+        //Check if the player is using touch control
         if(fingerCount > 0)
         {
             usingFingers = true;
         }
+
         //Check if the player is trying to jump
         if(Input.GetButtonDown("Jump") || (usingFingers && fingerCount > 0))
         {
@@ -80,21 +82,22 @@ public class PlayerMovement : MonoBehaviour
             jumpFinished = true;
         }
 
-
-
         prevPos = this.GetComponent<Transform>();
         hasPrevPos = true;
     }
 
     
-    //Collision event with coin
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //Collision event with coin
         if (other.gameObject.CompareTag("Coin"))
         {
-            Destroy(other.gameObject);
+            //Disable the collected coin
+            other.gameObject.SetActive(false);
             coinSound.Play();
         }
+        //Collision event with spike
         else if (other.gameObject.CompareTag("Spike"))
         {
             //Open the game over menu
@@ -116,6 +119,8 @@ public class PlayerMovement : MonoBehaviour
 
         //Moving the character
         controller.Move(moveX * Time.fixedDeltaTime, jump, jumpBoost, jumpFinished);
+
+        //Checking if the player continues holding the jump button
         if (jump && !jumpFinished)
         {
             jumpBoost = true;
