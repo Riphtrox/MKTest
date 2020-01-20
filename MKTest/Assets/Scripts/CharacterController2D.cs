@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
 {
-	[SerializeField] private float jumpForce = 100f;							    //The amount of force added when the player jumps
+	[SerializeField] private float jumpForce = 400f;							    //The amount of force added when the player jumps
     [SerializeField] private float jumpTime;                                        //The highest amount of time the player can jump
 	[Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;	    //How much to smooth out the movement
 	[SerializeField] private LayerMask whatIsGround;							    //A mask determining what is ground to the character
@@ -105,6 +105,11 @@ public class CharacterController2D : MonoBehaviour
     public void UnStuck()
     {
         rigidBody.AddForce(new Vector2(0f, 5f));
+    }
+
+    public void Bump()
+    {
+        rigidBody.AddForce(new Vector2(-5f, 0f));
     }
 
     public bool MovementCheck()

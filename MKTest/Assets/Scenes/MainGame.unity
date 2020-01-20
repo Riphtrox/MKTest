@@ -680,7 +680,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 240203621}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 876f09de72c86a74c8729f9835f42f42, type: 2}
+  m_Material: {fileID: 6200000, guid: d6f709e35e34abd4d83ccd931d9f86cd, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1281,9 +1281,6 @@ MonoBehaviour:
     prefab: {fileID: 8591620967854551655, guid: 0f0f131301af8b64b831dc689350a22d,
       type: 3}
     size: 6
-  pooledObject: {fileID: 2471304170521129742, guid: 9ce680deffbf968499166c1f7895a26d,
-    type: 3}
-  amountPooled: 6
 --- !u!4 &754112611
 Transform:
   m_ObjectHideFlags: 0
