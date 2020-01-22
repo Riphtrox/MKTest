@@ -264,7 +264,7 @@ MonoBehaviour:
       type: 3}
     size: 6
   - tag: area4
-    prefab: {fileID: 1584204410988486632, guid: f7ceff756cb52cc4d96f561ac5200457,
+    prefab: {fileID: 8478707680077122976, guid: f7ceff756cb52cc4d96f561ac5200457,
       type: 3}
     size: 6
   - tag: area5
@@ -417,7 +417,7 @@ MonoBehaviour:
   - {fileID: 2471304170521129742, guid: 9ce680deffbf968499166c1f7895a26d, type: 3}
   - {fileID: 9153621756601202010, guid: d9975e8aa4e659e4084a93db639b4022, type: 3}
   - {fileID: 2388811246196509119, guid: 63902748d380ecf45831d0131f02c310, type: 3}
-  - {fileID: 1584204410988486632, guid: f7ceff756cb52cc4d96f561ac5200457, type: 3}
+  - {fileID: 8478707680077122976, guid: f7ceff756cb52cc4d96f561ac5200457, type: 3}
   - {fileID: 6595550716315967190, guid: 820e942177d40f548bf3b9c2ee9a795c, type: 3}
   - {fileID: 8731097212384658729, guid: e62108e53b8f5074295d6bd5ad8f7d81, type: 3}
   player: {fileID: 240203621}
