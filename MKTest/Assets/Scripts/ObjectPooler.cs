@@ -72,6 +72,11 @@ public class ObjectPooler : MonoBehaviour
         for(int i = 0; i < target.childCount; i++)
         {
             target.GetChild(i).gameObject.SetActive(true);
+            if (target.GetChild(i).gameObject.CompareTag("Coin"))
+            {
+                Coin coin = target.GetChild(i).GetComponent<Coin>();
+                coin.Spawn();
+            }
         }
         
         //Moving the level part to the required location

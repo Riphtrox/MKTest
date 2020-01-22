@@ -5,7 +5,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     public int coinWorth = 1;       //How much the coin is worth
-    private bool counted = false;   //Ensuring the score count is a one-shot
+    public bool counted = false;   //Ensuring the score count is a one-shot
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -16,5 +16,10 @@ public class Coin : MonoBehaviour
             ScoreManager.instance.ScoreUpdate(coinWorth);
             counted = true;     //Score has been counted, don't count it again
         }
+    }
+
+    public void Spawn()
+    {
+        counted = false;
     }
 }
